@@ -1,5 +1,6 @@
 package com.wuhao.haorpc.config;
 
+import com.wuhao.haorpc.serializer.SerializerKeys;
 import lombok.Data;
 /**
  * @author:WuHao
@@ -34,4 +35,9 @@ public class RpcConfig {
      * 模拟调用
      */
     private boolean mock = false;
+
+    /**
+     * 序列化器
+     */
+    private String serializer = SerializerKeys.JDK;
 }

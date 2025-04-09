@@ -1,10 +1,12 @@
 package com.wuhao.haorpc.server;
 
+import com.wuhao.haorpc.RpcApplication;
 import com.wuhao.haorpc.model.RpcRequest;
 import com.wuhao.haorpc.model.RpcResponse;
 import com.wuhao.haorpc.registry.LocalRegistry;
 import com.wuhao.haorpc.serializer.JdkSerializer;
 import com.wuhao.haorpc.serializer.Serializer;
+import com.wuhao.haorpc.serializer.SerializerFactory;
 import io.vertx.core.Handler;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.http.HttpServerRequest;
@@ -37,7 +39,8 @@ public class HttpServerHandler implements Handler<HttpServerRequest> {
     public void handle(HttpServerRequest request) {
         // 指定序列化器
         // 使用 final 关键字的主要目的是 确保 serializer 变量的引用不可变
-        final Serializer serializer = new JdkSerializer();
+        final Serializer serializer = SerializerFactory.getInstance(RpcApplication.getRpcConfig().getSerializer());
+
 
         // 记录日志
         System.out.println("Received request: " + request.method() + " " + request.uri());
